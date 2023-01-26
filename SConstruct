@@ -2,7 +2,7 @@ import os, glob
 
 cenv = Environment(ENV = {'PATH':os.environ['PATH']})
 cenv.Append(CFLAGS = ['-fno-leading-underscore'])
-cenv.Object('elast_gen/unixtime.c')
+cenv.Object('src/unixtime.c')
 
 env = Environment(ENV = {'PATH':os.environ['PATH']})
 #env.Append(FORTRANPATH = ['/group/clas/builds/centos65/include/'], LIBPATH = ['/group/clas/builds/centos65/lib/'],LIBS = ['bosio','seb','bankdefs','c_cern','clasutil'])
@@ -15,7 +15,7 @@ env.Append(FORTRANPATH = ['inc/'])
 #sources = glob.glob('bos*.F')
 #sources += glob.glob('h2*.F')
 #sources += glob.glob('include/*.inc')
-sources = ['elast_gen/unixtime.o','elast_gen/elast_gen.F']
+sources = ['src/unixtime.o','src/elast_gen.F']
 print "sources =", sources
 
 env.Program('elast_gen',sources)
