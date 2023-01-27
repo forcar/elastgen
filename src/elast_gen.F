@@ -106,7 +106,7 @@ c     This version of the program makes only one new file and then quits.
       common /bos_events/es,ep,th0,ppx,ppy,ppz,eprot,egam,delta,
      * egamx,egamy,egamz,cstk,phik,q2
       common /parset/ebeam,epmin0,ps,rs,t_targ,bfac,th_min,th_max
-     * ,nmax,nprint, elas_inc,recname,id1,id2,id3,iext1,fmcall
+     * ,nmax,nprint, elas_inc,id1,id2,id3,iext1,fmcall
      * ,sigr_max,month,day,year
       common /new_parset/vertex_x,vertex_y,vertex_z,hydrogen_rad,v_z
       
@@ -119,7 +119,6 @@ c     This version of the program makes only one new file and then quits.
       integer nmax,nprint,elas_inc,id1,id2,id3,iext1
       integer ir1,opt_strag,opt_fiduc,idum_off,ip
 
-      character*8 recname
       character*28 ctime
       character*3 month
       character*2 day
@@ -381,7 +380,7 @@ c     to calculate kinematic quantities for the n-tuple.
       
 c     If mcall .gt. 0 generate mcall n-tuple events.
 
-      if (mcall .lt. 1)go to 20
+      if (mcall .lt. 1) go to 20
       
       if (mcall .lt. 100)then
         dismc(intreg,mcall)=dismc(intreg,mcall)+1
@@ -431,16 +430,15 @@ c     Increment ntuple 10
         ntp10(15)=egamx
         ntp10(16)=egamy
         ntp10(17)=egamz
-        ntp10(18)=vertex_x
-        ntp10(19)=vertex_y
-        ntp10(20)=vertex_z
-        ntp10(21)=q2
+        ntp10(18)=vertex_z
+        ntp10(19)=q2
+        ntp10(20)=phi_h
 
 clcs        call hfn(10,ntp10)
         write(89,*) ntp10(1),ntp10(2),ntp10(3),ntp10(4),ntp10(5),
      +   ntp10(6),ntp10(7),ntp10(8),ntp10(9),ntp10(10),ntp10(11),
      +   ntp10(12),ntp10(13),ntp10(14),ntp10(15),ntp10(16),ntp10(17),
-     +   ntp10(18),ntp10(19),ntp10(20),ntp10(21)
+     +   ntp10(18),ntp10(19),ntp10(20)
         
         nevent=nevent+1
 
@@ -1173,7 +1171,7 @@ c     Rotate all momenta by a random angle around the z axis
      * egamx,egamy,egamz,cstk,phik,q2
 
       common /parset/ebeam,epmin0,ps,rs,t_targ,bfac,th_min,th_max
-     * ,nmax,nprint, elas_inc,recname,id1,id2,id3,iext1,fmcall
+     * ,nmax,nprint, elas_inc,id1,id2,id3,iext1,fmcall
      * ,sigr_max,month,day,year
       common /new_parset/vertex_x,vertex_y,vertex_z,hydrogen_rad,v_z
 
@@ -1192,8 +1190,6 @@ c     Rotate all momenta by a random angle around the z axis
       real vertex_x,vertex_y,vertex_z,hydrogen_rad,v_z      
       integer nmax,nprint,elas_inc,id1,id2,id3,iext1
 
-
-      character*8 recname
       character*3 month
       character*2 day
       character*2 year
@@ -1242,8 +1238,6 @@ c     is considered non-radiative.
 
 c     Name the output rz file according to energy.
 c     filerz=elasgen-1.6-0000.rz.00, for example.
-
-      recname = 'MCEVENT'
 
       write(12,*)' Incident energy is ',ebeam,' GeV'
       write(12,*)' Minimum accepted scattered electron energy is',epmin0
