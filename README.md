@@ -35,7 +35,8 @@ options, input e- straggling should be commented out.
      1                   c,     !Maximum cross section
      1  opt_strag,opt_fiduc,    !Straggling of scattered e- (1=on,0=off) and fiducial cut options
      1             idum_off)    !random number offset
-     
+
+## input file (demo)
      0.2
      0.005
      3
