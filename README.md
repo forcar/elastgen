@@ -18,9 +18,9 @@ spurious statistical spikes when f=1 and delta=0. For that choice of
 options, input e- straggling should be commented out.  
 
 ## input
-      call elast_gen(file1,     !BOS output file
+      call elast_gen(file1,     !LUND event file
      1               file2,     !Summary
-     1               file3,     !Ntuple
+     1               file3,     !ntuple event file
      1               file4,     !Summary
      1                   f,     !fraction of events in elas peak
      1                   d,     !egam < delta considered elastic
