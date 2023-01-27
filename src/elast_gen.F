@@ -4,9 +4,9 @@
       real f,d,tl,tr,vx,vy,vz,be,emn,smn,smx,c
       integer g_,p_,M,opt_strag,opt_fiduc,idum_off
       
-      data file1/'elast_gen.evt'/
+      data file1/'elast_gen.lund'/
       data file2/'elast_gen.out'/
-      data file3/'elast_gen.rz'/
+      data file3/'elast_gen.txt'/
       data file4/'elast_gen.sum'/
       
       read *, f
@@ -107,7 +107,7 @@ c     This version of the program makes only one new file and then quits.
      * egamx,egamy,egamz,cstk,phik,q2
       common /parset/ebeam,epmin0,ps,rs,t_targ,bfac,th_min,th_max
      * ,nmax,nprint, elas_inc,recname,id1,id2,id3,iext1,fmcall
-     * ,sigr_max,month,day,year,filerz,file_out,file_sum,file_bos
+     * ,sigr_max,month,day,year
       common /new_parset/vertex_x,vertex_y,vertex_z,hydrogen_rad,v_z
       
       real mel,mp,pi,alpha
@@ -118,10 +118,7 @@ c     This version of the program makes only one new file and then quits.
       real r_targ,tt
       integer nmax,nprint,elas_inc,id1,id2,id3,iext1
       integer ir1,opt_strag,opt_fiduc,idum_off,ip
-      character*132 filerz
-      character*132 file_out
-      character*132 file_sum
-      character*132 file_bos
+
       character*8 recname
       character*28 ctime
       character*3 month
@@ -191,17 +188,14 @@ clcs      common /pawc/h(5000000)
       data mp/0.93827/,mel/0.511E-3/,r2d/57.2958/
       data ctime  /'                            '/
      
-      open(unit=88, file='clas12.lund')
-      open(unit=89, file='clas12.rzn')
+      open(unit=88, file=file1)
+      open(unit=89, file=file3)      
+      open(unit=12, file=file2)
+      open(unit=14, file=file4)
 
 c     egdiv is the fraction of the time we look in the range of
 c     photon energies from 0 to delta.
       data egdiv/0.2/
-
-      file_bos = file1
-      file_out = file2
-      filerz   = file3
-      file_sum = file4
 
       pi	= 2.*acos(0.)
       csrng	= .04
@@ -242,10 +236,10 @@ c     photon energies from 0 to delta.
       wmax	= 4.
       bfac	= 4./3.
       alpha	= 1./137.01
+      
       call bos_setup(g_)
-
- 1    call par_setup(file1,file2,file3,file4,f,tl,vx,vy,vz,be,
-     +				emn,smn,smx,p_,M,c)
+ 1    call par_setup(f,tl,vx,vy,vz,be,emn,smn,smx,p_,M,c)
+      
       call timex(tsec0)
 
       write(12,*)' Elastic Scattering, Date and time:',ctime
@@ -443,7 +437,11 @@ c     Increment ntuple 10
         ntp10(21)=q2
 
 clcs        call hfn(10,ntp10)
-        write(89,*) es,ep,th0d,w,eprot
+        write(89,*) ntp10(1),ntp10(2),ntp10(3),ntp10(4),ntp10(5),
+     +   ntp10(6),ntp10(7),ntp10(8),ntp10(9),ntp10(10),ntp10(11),
+     +   ntp10(12),ntp10(13),ntp10(14),ntp10(15),ntp10(16),ntp10(17),
+     +   ntp10(18),ntp10(19),ntp10(20),ntp10(21)
+        
         nevent=nevent+1
 
         call bos_cal(phi_r)
@@ -1166,8 +1164,7 @@ c     Rotate all momenta by a random angle around the z axis
       return
       end
 
-      subroutine par_setup(file1,file2,file3,file4,f,tl,vx,vy,vz,be,
-     +				emn,smn,smx,p_,M,c)
+      subroutine par_setup(f,tl,vx,vy,vz,be,emn,smn,smx,p_,M,c)
 
       implicit none
 
@@ -1177,7 +1174,7 @@ c     Rotate all momenta by a random angle around the z axis
 
       common /parset/ebeam,epmin0,ps,rs,t_targ,bfac,th_min,th_max
      * ,nmax,nprint, elas_inc,recname,id1,id2,id3,iext1,fmcall
-     * ,sigr_max,month,day,year,filerz,file_out,file_sum,file_bos
+     * ,sigr_max,month,day,year
       common /new_parset/vertex_x,vertex_y,vertex_z,hydrogen_rad,v_z
 
 #include "mc.inc"
@@ -1195,10 +1192,7 @@ c     Rotate all momenta by a random angle around the z axis
       real vertex_x,vertex_y,vertex_z,hydrogen_rad,v_z      
       integer nmax,nprint,elas_inc,id1,id2,id3,iext1
 
-      character*132 filerz
-      character*132 file_out
-      character*132 file_sum
-      character*132 file_bos
+
       character*8 recname
       character*3 month
       character*2 day
@@ -1250,9 +1244,6 @@ c     Name the output rz file according to energy.
 c     filerz=elasgen-1.6-0000.rz.00, for example.
 
       recname = 'MCEVENT'
-
-      open(unit=12,file=file_out)
-      open(unit=14,file=file_sum)
 
       write(12,*)' Incident energy is ',ebeam,' GeV'
       write(12,*)' Minimum accepted scattered electron energy is',epmin0
