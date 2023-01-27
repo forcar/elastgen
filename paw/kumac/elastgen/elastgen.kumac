@@ -1,9 +1,11 @@
 
-  macro init txtfile=elast_gen rzfile=elastgen nev=25000
-    nt/create 10 'elastgen' 20 ' ' [nev] es ep the w ppx ppy ppz eprot thpr phpr mm2 cstk phk eg egx egy egz vz q2 phir
-    nt/read 10 [txtfile].txt
+  macro init txtfile=../elast_gen rzfile=elastgen
+    cmd = 'wc -l '//[txtfile]//'.txt'
+    nev = $eval($word($shell([cmd]),1,1,' ')-1)
     hi/file 1 [rzfile].rzn 1024 N
-    hrout 10
+    nt/create 10 'elastgen' 20 '//lun1' [nev] es ep the w ppx ppy ppz eprot thpr phpr mm2 cstk phk eg egx egy egz vz q2 phir
+    nt/read 10 [txtfile].txt
+    nt/print 10
     close 0
   return
 
