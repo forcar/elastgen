@@ -1,0 +1,39 @@
+filecase keep
+
+global/create local_root .
+global/create pawroot       [local_root]
+
+
+global/create kupath   [pawroot]/kumac
+global/create utilvec  [kupath]/util/vec
+
+global/create pawlogon.kupath [kupath]
+
+path=.,[kupath]/util,[kupath]/elastgen
+default $quote([path]) option=a
+
+
+cselect
+
+set file 2
+set_show/prompt CLASPAW>
+
+
+machine = $MACHINE
+
+exec utilGenColormap 
+global/import nlevels
+vec/cre nlev i [nlevels]
+
+
+pawopt=0
+
+* application COMIS quit
+*  !setopt 'gcc -O2 -c' cc
+*  !setopt 'gfortran -c' fort
+*  !setopt '/tmp' path
+* quit
+
+* call [pawlogon.kupath]/util/fun/setbuf.f77
+
+

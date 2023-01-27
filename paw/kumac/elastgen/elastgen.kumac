@@ -1,0 +1,17 @@
+
+macro init txtfile=elast_gen.txt rzfile=elast_gen.rz
+  nt/cr 10 'elastgen' 21 ' ' 25000 es ep thel w ppx ppy ppz eprot thpr phpr mm2 cstk phk eg egx egy egz vx vy vz q2
+  nt/read 10 [txtfile]
+  hi/file 1 [rzfile] 1024 N
+  hrout 10
+  nt/print 10
+return
+
+macro plot
+
+  zone 2 2
+  nt/plot 10.w
+  nt/plot 10.ep%thel
+
+return
+  
