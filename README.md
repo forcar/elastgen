@@ -50,4 +50,11 @@ options, input e- straggling should be commented out.
      0.00002
      1,0
      123
-
+## build, run and view (ifarm)
+    ifarm1801.jlab.org> scons
+    ifarm1801.jlab.org> ./elastgen < inp/elas_clas12.inp
+    ifarm1801.jlab.org> cd paw
+    ifarm1801.jlab.org> paw
+    CLASPAW> elastgen
+    CLASPAW> elastgen#plot
+    
