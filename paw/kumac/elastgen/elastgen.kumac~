@@ -1,2 +1,0 @@
-nt/cr 10 'elastgen' 21 ' ' 25000 es ep th0d w ppx ppy ppz eprot thpr phpr mm2 cstk phk eg egx egy egz vx vy vz q2
-nt/read 10 elast_gen.txt

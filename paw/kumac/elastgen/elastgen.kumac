@@ -1,17 +1,23 @@
 
-macro init txtfile=elast_gen.txt rzfile=elast_gen.rz
-  nt/cr 10 'elastgen' 21 ' ' 25000 es ep thel w ppx ppy ppz eprot thpr phpr mm2 cstk phk eg egx egy egz vx vy vz q2
-  nt/read 10 [txtfile]
-  hi/file 1 [rzfile] 1024 N
-  hrout 10
-  nt/print 10
-return
+  macro init txtfile=elast_gen rzfile=elastgen nev=25000
+    nt/create 10 'elastgen' 21 ' ' [nev] es ep the w ppx ppy ppz eprot thpr phpr mm2 cstk phk eg egx egy egz vx vy vz q2
+    nt/read 10 [txtfile].txt
+    hi/file 1 [rzfile].rzn 1024 N
+    hrout 10
+    close 0
+  return
 
-macro plot
+  macro plot rzfile
+    chain - ; chain ntup [rzfile].rzn ; cd //ntup
+    2d 103 '' 50 5 15 50 2 11
+    2d 104 '' 50 0.9 4.1 50 58 80;
 
-  zone 2 2
-  nt/plot 10.w
-  nt/plot 10.ep%thel
+    opt logz
+    zone 2 2
+    nt/plot 10.w
+    nt/plot 10.eg
+    nt/plot 10.ep%the idh=103 option=N; hi/plot 103 colz
+    nt/plot 10.the+thpr%w q2>0.8.and.q2<0.9 idh=104 option=N ; title_gl '' ; hi/plot 104 colz
 
-return
-  
+  return
+

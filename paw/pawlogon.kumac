@@ -1,23 +1,20 @@
 filecase keep
 
 global/create local_root .
-global/create pawroot       [local_root]
+global/create pawroot [local_root]
 
-
-global/create kupath   [pawroot]/kumac
-global/create utilvec  [kupath]/util/vec
+global/create kupath  [pawroot]/kumac
+global/create utilvec [kupath]/util/vec
 
 global/create pawlogon.kupath [kupath]
 
 path=.,[kupath]/util,[kupath]/elastgen
 default $quote([path]) option=a
 
-
 cselect
 
 set file 2
 set_show/prompt CLASPAW>
-
 
 machine = $MACHINE
 
@@ -35,5 +32,4 @@ pawopt=0
 * quit
 
 * call [pawlogon.kupath]/util/fun/setbuf.f77
-
 
