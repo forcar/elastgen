@@ -1,4 +1,7 @@
-# elastgen     
+# elastgen 
+Original author: Ralph Minehart (University of Virginia)
+Modifications by K. Joo and L.C. Smith (UVA)
+
 This program makes event files (plain text and LUND format) for (e,e'p) elastic scattering
 with the elastic peak modified by vertex corrections according to the Mo-Tsai 
 formula (II.6) and internal bremmstrahlung (radiative tails) calculated from 
