@@ -7,17 +7,21 @@
     close 0
   return
 
-  macro plot rzfile
+  macro plot rzfile=elastgen title=elas-clas12.inp
     chain - ; chain ntup [rzfile].rzn ; cd //ntup
+    set gsiz 0.4; set ygti 0.5; title_gl 'ELASTGEN '//[title];
+    set cmmg -0.1; set cmap 2; set ylab 0 ; opt logz
+
+    1d 101 '' 50 0.8 4.1
+    1d 102 '' 50 -0.1 8.5
     2d 103 '' 50 5 15 50 2 11
     2d 104 '' 50 0.9 4.1 50 58 80;
-
-    opt logz
+    
     zone 2 2
-    nt/plot 10.w
-    nt/plot 10.eg
-    nt/plot 10.ep%the idh=103 option=N; hi/plot 103 colz
-    nt/plot 10.the+thpr%w q2>0.8.and.q2<0.9 idh=104 option=N ; title_gl '' ; hi/plot 104 colz
+    nt/proj 101 10.w ; hi/plot 101 ; atitle 'w (GeV)'
+    nt/proj 102 10.eg; hi/plot 102 ; atitle 'eg (GeV)'
+    nt/proj 103 10.ep%the; hi/plot 103 colz; atitle 'the (deg)' 'ep (GeV)' 
+    nt/proj 104 10.the+thpr%w q2>0.8.and.q2<0.9 ;  hi/plot 104 colz; atitle 'w (GeV)' 'the + thpr (deg)'
 
   return
 
