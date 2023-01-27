@@ -13,3 +13,22 @@ on.  The code attempts to compensate for this by oversampling those
 events with large incident e- energy loss (mcall>1), which may cause 
 spurious statistical spikes when f=1 and delta=0. For that choice of
 options, input e- straggling should be commented out.  
+
+##input
+      call elast_gen(file1,     !BOS output file
+     1               file2,     !Summary
+     1               file3,     !Ntuple
+     1               file4,     !Summary
+     1                   f,     !fraction of events in elas peak
+     1                   d,     !egam < delta considered elastic
+     1                  g_,     !Number of particles to detect / event
+     1               tl,tr,     !target length, radius (cm)
+     1             vx,vy,vz,    !target vertex coordinates
+     1                  be,     !beam energy
+     1                 emn,     !minimum scattered e- energy
+     1             smn,smx,     !min,max e- scattering angle
+     1                  p_,     !0=include elastic 1=exclude
+     1                   M,     !Process M events
+     1                   c,     !Maximum cross section
+     1  opt_strag,opt_fiduc,    !Straggling of scattered e- (1=on,0=off) and fiducial cut options
+     1             idum_off)    !random number offset
