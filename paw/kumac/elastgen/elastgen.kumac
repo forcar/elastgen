@@ -1,5 +1,8 @@
+  * init: converts plain text output file to ntuple
+  * plot: demo of ntuple variables
 
   macro init txtfile=../elast_gen rzfile=elastgen
+
     cmd = 'wc -l '//[txtfile]//'.txt'
     nev = $eval($word($shell([cmd]),1,1,' ')-1)
     hi/file 1 [rzfile].rzn 1024 N
@@ -7,9 +10,11 @@
     nt/read 10 [txtfile].txt
     nt/print 10
     close 0
+    
   return
 
   macro plot rzfile=elastgen title=elas-clas12.inp
+  
     chain - ; chain ntup [rzfile].rzn ; cd //ntup
     set gsiz 0.4; set ygti 0.5; title_gl 'ELASTGEN '//[title];
     set cmmg -0.1; set cmap 2; set ylab 0 ; opt logz
