@@ -35,7 +35,22 @@ options, input e- straggling should be commented out.
      1                   c,     !Maximum cross section
      1  opt_strag,opt_fiduc,    !Straggling of scattered e- (1=on,0=off) and fiducial cut options
      1             idum_off)    !random number offset
-
+## ntuple variables
+     es: incident e- energy 
+     ep: scattered e- energy
+     the: scattered e- theta
+     w:  true hadronic invariant mass
+     ppx,ppy,ppz: components of p+ momentum
+     eprot: proton energy  
+     thpr: proton theta
+     phpr: proton phi
+     mm: missing mass
+     cstk,phk: photon polar angles relative to the q vector
+     eg: photon energy
+     egx,egy,egz: components of photon momentum
+     vz: target vertex of interaction
+     q2: true invariant mass of photon
+     phir: overall phi rotation angle in local sector system
 ## demo input file (inp/elas_clas12.inp)
      0.2
      0.005
