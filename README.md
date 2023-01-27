@@ -17,7 +17,7 @@ events with large incident e- energy loss (mcall>1), which may cause
 spurious statistical spikes when f=1 and delta=0. For that choice of
 options, input e- straggling should be commented out.  
 
-## input
+## input arguments
       call elast_gen(file1,     !LUND event file
      1               file2,     !Summary
      1               file3,     !ntuple event file
@@ -35,3 +35,19 @@ options, input e- straggling should be commented out.
      1                   c,     !Maximum cross section
      1  opt_strag,opt_fiduc,    !Straggling of scattered e- (1=on,0=off) and fiducial cut options
      1             idum_off)    !random number offset
+## input file (demo)
+inp/elas_clas12.inp
+0.2
+0.005
+3
+4.0 0.6
+0.0 0.0 0.0 
+10.600
+2.5
+5. 20.
+0
+100000
+0.00002
+1,0
+123
+
