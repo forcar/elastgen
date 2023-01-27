@@ -14,7 +14,7 @@ events with large incident e- energy loss (mcall>1), which may cause
 spurious statistical spikes when f=1 and delta=0. For that choice of
 options, input e- straggling should be commented out.  
 
-##input
+#input
       call elast_gen(file1,     !BOS output file
      1               file2,     !Summary
      1               file3,     !Ntuple
