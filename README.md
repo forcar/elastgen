@@ -5,7 +5,7 @@ Modifications by K. Joo and L.C. Smith (UVA)
 This program makes event files (plain text and LUND format) for (e,e'p) elastic scattering
 with the elastic peak modified by vertex corrections according to the Mo-Tsai 
 formula (II.6) and internal bremmstrahlung (radiative tails) calculated from 
-a Monte-Carlo sampling of formula (B.4) and (B.5) from [RMP, Vol. 41, 205 (1969)] (https://github.com/forcar/elastgen/blob/master/pdf/RevModPhys.41.205.pdf)
+a Monte-Carlo sampling of formula (B.4) and (B.5) from [RMP, Vol. 41, 205 (1969)](https://github.com/forcar/elastgen/blob/master/pdf/RevModPhys.41.205.pdf)
 
 Some tricks are employed to make the monte-carlo concentrate
 on the regions where the cross section is large.  Also the
