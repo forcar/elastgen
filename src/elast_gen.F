@@ -6,8 +6,7 @@
       
       data file1/'elast_gen.lund'/
       data file2/'elast_gen.out'/
-      data file3/'elast_gen.txt'/
-      data file4/'elast_gen.sum'/
+      data file3/'elast_gen.sum'/
       
       read *, f
       read *, d
@@ -24,9 +23,8 @@
       read *, idum_off
       
       call elast_gen(file1,     !LUND event file
-     1               file2,     !Summary 
-     1               file3,     !ntuple event file
-     1               file4,     !Summary
+     1               file2,     !Summary 1 
+     1               file3,     !Summary 2
      1                   f,     !fraction of events in elas peak
      1                   d,     !egam < delta considered elastic
      1                  g_,     !Number of particles to detect / event
@@ -43,7 +41,7 @@
      
       end
       
-      subroutine elast_gen(file1,file2,file3,file4,f,d,g_,tl,tr,
+      subroutine elast_gen(file1,file2,file3,f,d,g_,tl,tr,
      +			vx,vy,vz,be,emn,smn,smx,p_,M,c,
      +                   opt_strag,opt_fiduc,idum_off)
      
@@ -188,10 +186,13 @@ clcs      common /pawc/h(5000000)
       data mp/0.93827/,mel/0.511E-3/,r2d/57.2958/
       data ctime  /'                            '/
      
-      open(unit=88, file=file1)
-      open(unit=89, file=file3)      
+      open(unit=88, file=file1)      
       open(unit=12, file=file2)
-      open(unit=14, file=file4)
+      open(unit=14, file=file3)
+
+      open(unit=89, file='n10.rzn')
+      open(unit=90, file='n11.rzn')
+      open(unit=91, file='n12.rzn')
 
 c     egdiv is the fraction of the time we look in the range of
 c     photon energies from 0 to delta.
@@ -546,9 +547,13 @@ clcs      CALL bos_end(recname)
       ntp11(15)=c
       ntp11(16)=opt_strag
       ntp11(17)=opt_fiduc
-      ntp11(18)=idum_off 
+      ntp11(18)=idum_off  
      
 clcs      call hfn(11,ntp11)
+       write(90,*) ntp11(1),ntp11(2),ntp11(3),ntp11(4),ntp11(5),
+     + ntp11(6),ntp11(7),ntp11(8),ntp11(9),ntp11(10),ntp11(11),
+     + ntp11(12),ntp11(13),ntp11(14),ntp11(15),ntp11(16),ntp11(17),
+     + ntp11(18)
         
       ntp12(1)=t_elapse
       ntp12(2)=nevent
@@ -558,6 +563,7 @@ clcs      call hfn(11,ntp11)
       ntp12(6)=nevent/sig_sum*1e-4
 
 clcs      call hfn(12,ntp12)
+       write(91,*) ntp12(1),ntp12(2),ntp12(3),ntp12(4),ntp12(5),ntp12(6)
       
 c     Close out the n-tuple file
 clcs      call hrout(0,icycle,' ')
@@ -567,6 +573,8 @@ clcs      call hrend('elasgen')
       close(unit=14)
       close(unit=88)
       close(unit=89)
+      close(unit=90)
+      close(unit=91)
 
       stop
       end
