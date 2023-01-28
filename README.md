@@ -75,3 +75,6 @@ options, input e- straggling should be commented out.
     
 <img width="743" alt="Screen Shot 2023-01-27 at 5 28 53 PM" src="https://user-images.githubusercontent.com/10797791/215218424-e7cbeb8a-6fac-4700-9250-a78cc3da4c2b.png">
 
+## output info
+* [elast_gen.out](https://github.com/forcar/elastgen/blob/master/elast_gen.out)
+* [elast_gen.sum](https://github.com/forcar/elastgen/blob/master/elast_gen.sum)  Beam time at Luminosity =1.0E34 = 437.656 seconds
