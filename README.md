@@ -1,4 +1,4 @@
-# elastgen 
+# [elastgen](https://github.com/forcar/elastgen/blob/master/src/elast_gen.F)
 Original author: Ralph Minehart (University of Virginia)
 Modifications by K. Joo and L.C. Smith (UVA)
 
