@@ -23,9 +23,9 @@
       read *, opt_strag,opt_fiduc 
       read *, idum_off
       
-      call elast_gen(file1,     !BOS output file
-     1               file2,     !Summary
-     1               file3,     !Ntuple
+      call elast_gen(file1,     !LUND event file
+     1               file2,     !Summary 
+     1               file3,     !ntuple event file
      1               file4,     !Summary
      1                   f,     !fraction of events in elas peak
      1                   d,     !egam < delta considered elastic
@@ -51,12 +51,12 @@ c     Original author: Ralph Minehart (University of Virginia)
 c     Modifications by K. Joo and L.C. Smith (UVA)
 c     See http://clasweb.jlab.org/cgi-bin/cvsweb/cvsweb.cgi/packages/aao/elast_gen
 
-c     This program makes ntuples and BOS event files for (e,e'p) elastic scattering
+c     This program makes Ntuple and LUND event files for (e,e'p) elastic scattering
 c     with the elastic peak modified by vertex corrections according to the Mo-Tsai 
 c     formula (II.6) and internal bremmstrahlung (radiative tails) calculated from 
 c     a Monte-Carlo sampling of formula (B.4) and (B.5) from RMP, Vol. 41, 205 (1969). 
 
-c     Ntuple 10 contains:
+c     Ntuple 10  contains:
 c     ES: incident e- energy 
 c     EP: scattered e- energy
 c     THETE: scattered e- theta
@@ -69,8 +69,9 @@ c     MM: missing mass
 c     CSTHK,PHIK: photon angles relative to the q vector
 c     EG: photon energy
 c     EGX,EGY,EGZ: components of photon momentum
-c     VX,VY,VZ: target vertex of interaction
+c     VZ: target Z-vertex of interaction
 c     Q2: true invariant mass of photon
+c     PHIR: phi angle in local sector 
 
 c     Ntuple 11 contains:
 c     Input arguments after file4
@@ -1242,7 +1243,7 @@ c     filerz=elasgen-1.6-0000.rz.00, for example.
       write(12,*)' Incident energy is ',ebeam,' GeV'
       write(12,*)' Minimum accepted scattered electron energy is',epmin0
       write(12,*)' Target thickness is ',t_targ/bfac,' r.l.'
-      write(12,*)' Number of particles per event in bos bank =',npart
+      write(12,*)' Number of particles per event in output files =',npart
       write(14,*)' Radiative elastic scattering'
       write(14,5001)ebeam
  5001 format(' Incident electron energy =',f7.3,' GeV')
