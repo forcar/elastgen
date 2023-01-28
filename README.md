@@ -19,9 +19,8 @@ options, input e- straggling should be commented out.
 
 ## input arguments
       call elast_gen(file1,     !LUND event file
-     1               file2,     !Summary
-     1               file3,     !ntuple event file
-     1               file4,     !Summary
+     1               file2,     !Summary 1 
+     1               file3,     !Summary 2
      1                   f,     !fraction of events in elas peak
      1                   d,     !egam < delta considered elastic
      1                  g_,     !Number of particles to detect / event
@@ -35,22 +34,7 @@ options, input e- straggling should be commented out.
      1                   c,     !Maximum cross section
      1  opt_strag,opt_fiduc,    !Straggling of scattered e- (1=on,0=off) and fiducial cut options
      1             idum_off)    !random number offset
-## ntuple variables
-     es: incident e- energy 
-     ep: scattered e- energy
-     the: scattered e- theta
-     w:  true hadronic invariant mass
-     ppx,ppy,ppz: components of p+ momentum
-     eprot: proton energy  
-     thpr: proton theta
-     phpr: proton phi
-     mm: missing mass
-     cstk,phk: photon polar angles relative to the q vector
-     eg: photon energy
-     egx,egy,egz: components of photon momentum
-     vz: target vertex of interaction
-     q2: true invariant mass of photon
-     phir: overall phi rotation angle in local sector system
+
 ## demo input file (inp/elas_clas12.inp)
      0.2
      0.005
@@ -75,6 +59,39 @@ options, input e- straggling should be commented out.
     
 <img width="743" alt="Screen Shot 2023-01-27 at 5 28 53 PM" src="https://user-images.githubusercontent.com/10797791/215218424-e7cbeb8a-6fac-4700-9250-a78cc3da4c2b.png">
 
-## output info
+## ntuple 10  
+     es: incident e- energy 
+     ep: scattered e- energy
+     the: scattered e- theta
+     w:  true hadronic invariant mass
+     ppx,ppy,ppz: components of p+ momentum
+     eprot: proton energy  
+     thpr: proton theta
+     phpr: proton phi
+     mm: missing mass
+     cstk,phk: photon polar angles relative to the q vector
+     eg: photon energy
+     egx,egy,egz: components of photon momentum
+     vz: target vertex of interaction
+     q2: true invariant mass of photon
+     phir: overall phi rotation angle in local sector system
+     
+## ntuple 11
+     TELAP: Elapsed CPU time
+     NEVEN: Number of generated events
+     MCALL: mcall_max
+     SIGI: direct integrated cross section
+     SIGM: monte-carlo integrated cross section
+     BMTIM: Total beam time in seconds at lum=10**34
+     
+## ntuple 12  
+     TELAP: Elapsed CPU time
+     NEVEN: Number of generated events
+     MCALL: mcall_max
+     SIGI: direct integrated cross section
+     SIGM: monte-carlo integrated cross section
+     BMTIM: Total beam time in seconds at lum=10**34
+     
+## output summary files
 * [elast_gen.out](https://github.com/forcar/elastgen/blob/master/elast_gen.out)
-* [elast_gen.sum](https://github.com/forcar/elastgen/blob/master/elast_gen.sum)  Beam time at Luminosity =1.0E34 = 437.656 seconds
+* [elast_gen.sum](https://github.com/forcar/elastgen/blob/master/elast_gen.sum)  
