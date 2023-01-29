@@ -80,12 +80,27 @@ options, input e- straggling should be commented out.
      phir: overall phi rotation angle in local sector system
      
 ## ntuple 11
-     TELAP: Elapsed CPU time
-     NEVEN: Number of generated events
-     MCALL: mcall_max
-     SIGI: direct integrated cross section
-     SIGM: monte-carlo integrated cross section
-     BMTIM: Total beam time in seconds at lum=10**34
+INPUT OPTIONS
+ *      1     * F         * 0.200000E+00 * 0.200000E+00 *
+ *      2     * D         * 0.500000E-02 * 0.500000E-02 *
+ *      3     * G         * 0.300000E+01 * 0.300000E+01 *
+ *      4     * TL        * 0.400000E+01 * 0.400000E+01 *
+ *      5     * TR        * 0.600000E+00 * 0.600000E+00 *
+ *      6     * VX        * 0.000000E+00 * 0.000000E+00 *
+ *      7     * VY        * 0.000000E+00 * 0.000000E+00 *
+ *      8     * VZ        * 0.000000E+00 * 0.000000E+00 *
+ *      9     * BE        * 0.106000E+02 * 0.106000E+02 *
+ *     10     * EMN       * 0.250000E+01 * 0.250000E+01 *
+ *     11     * SMN       * 0.500000E+01 * 0.500000E+01 *
+ *     12     * SMX       * 0.200000E+02 * 0.200000E+02 *
+ *     13     * P         * 0.000000E+00 * 0.000000E+00 *
+ *     14     * M         * 0.100000E+06 * 0.100000E+06 *
+ *     15     * C         * 0.200000E-04 * 0.200000E-04 *
+ *     16     * OPST0     * 0.000000E+00 * 0.000000E+00 *
+ *     17     * OPST1     * 0.000000E+00 * 0.000000E+00 *
+ *     18     * OPTFI     * 0.000000E+00 * 0.000000E+00 *
+ *     19     * IDMOF     * 0.123000E+03 * 0.123000E+03 *
+
      
 ## ntuple 12  
      TELAP: Elapsed CPU time
