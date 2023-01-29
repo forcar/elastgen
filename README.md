@@ -49,7 +49,8 @@ options, input e- straggling should be commented out.
      0
      100000
      0.00002
-     1,0
+     1,1
+     0
      123
 ## build, run and view (ifarm)
     ifarm1801.jlab.org> scons
