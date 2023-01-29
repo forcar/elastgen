@@ -1,0 +1,135 @@
+<gcard>
+
+  <!-- target. Notice variation give the target type. Can be: lH2, lD2, ND3 -->
+  <detector name="experiments/clas12/targets/cad/"   factory="CAD"/>
+  <detector name="experiments/clas12/targets/target" factory="TEXT" variation="lH2"/>
+  
+  <!-- magnets -->
+  <detector name="experiments/clas12/magnets/solenoid" factory="TEXT" variation="original"/>
+  <detector name="experiments/clas12/magnets/cad/"     factory="CAD" />
+
+  <detector name="experiments/clas12/beamline/cadBeamline/" factory="CAD"/>
+
+  <!--high threshold cherenkov -->
+  <detector name="experiments/clas12/htcc/htcc"      factory="TEXT" variation="original"/>
+	
+  <detector name="experiments/clas12/fc/forwardCarriage" factory="TEXT" variation="original"/>
+
+   <!-- forward carriage -->
+  <detector name="experiments/clas12/fc/forwardCarriage" factory="TEXT" variation="TorusSymmetric"/>
+  
+  <detector name="experiments/clas12/ec/ec"            factory="TEXT" variation="default"/>
+  <detector name="experiments/clas12/ftof/ftof"        factory="TEXT" variation="rga_fall2018"/>
+  <detector name="experiments/clas12/pcal/pcal"        factory="TEXT" variation="default"/>
+
+
+  <!-- you can scale the fields here. Remember torus -1 means e- INBENDING  -->
+  <option name="SCALE_FIELD" value="TorusSymmetric, -1"/>
+  <option name="SCALE_FIELD" value="clas12-newSolenoid, -1"/>
+
+  <!-- hall field  -->
+  <option name="HALL_FIELD"  value="clas12-newSolenoid"/>
+
+  <!-- fields, precise mode -->
+  <option name="FIELD_PROPERTIES" value="TorusSymmetric,     2*mm, G4ClassicalRK4, linear"/>
+  <option name="FIELD_PROPERTIES" value="clas12-newSolenoid, 1*mm, G4ClassicalRK4, linear"/>
+
+    <detector name="ec_s2">
+        <existence exist="no" />
+    </detector>
+    <detector name="ec_s3">
+        <existence exist="no" />
+    </detector>
+    <detector name="ec_s4">
+        <existence exist="no" />
+    </detector>
+    <detector name="ec_s5">
+        <existence exist="no" />
+    </detector>
+    <detector name="ec_s6">
+        <existence exist="no" />
+    </detector>
+    <detector name="pcal_s2">
+        <existence exist="no" />
+    </detector>
+    <detector name="pcal_s3">
+        <existence exist="no" />
+    </detector>
+    <detector name="pcal_s4">
+        <existence exist="no" />
+    </detector>
+    <detector name="pcal_s5">
+        <existence exist="no" />
+    </detector>
+    <detector name="pcal_s6">
+        <existence exist="no" />
+    </detector>
+    <detector name="ftof_p1a_s2">
+        <existence exist="no" />
+    </detector>
+    <detector name="ftof_p1a_s3">
+        <existence exist="no" />
+    </detector>
+    <detector name="ftof_p1a_s4">
+        <existence exist="no" />
+    </detector>
+    <detector name="ftof_p1a_s5">
+        <existence exist="no" />
+    </detector>
+    <detector name="ftof_p1a_s6">
+        <existence exist="no" />
+    </detector>
+    <detector name="ftof_p1b_s2">
+        <existence exist="no" />
+    </detector>
+    <detector name="ftof_p1b_s3">
+        <existence exist="no" />
+    </detector>
+    <detector name="ftof_p1b_s4">
+        <existence exist="no" />
+    </detector>
+    <detector name="ftof_p1b_s5">
+        <existence exist="no" />
+    </detector>
+    <detector name="ftof_p1b_s6">
+        <existence exist="no" />
+    </detector>
+    <detector name="ftof_p2_s2">
+        <existence exist="no" />
+    </detector>
+    <detector name="ftof_p2_s3">
+        <existence exist="no" />
+    </detector>
+    <detector name="ftof_p2_s4">
+        <existence exist="no" />
+    </detector>
+    <detector name="ftof_p2_s5">
+        <existence exist="no" />
+    </detector>
+    <detector name="ftof_p2_s6">
+        <existence exist="no" />
+    </detector>
+
+
+
+<!--  <option name="INTEGRATEDRAW" value="bst, ctof, dc, ec,  ftof_p1a, ftof_p1b, ftof_2b, htcc, pcal"/> -->
+<!--  <option name="INTEGRATEDDGT" value="ec,ftof,ftof_p1a,ftof_p1b,ftof_p2"/> -->
+
+  <option name="INTEGRATEDRAW" value="ftof_p1b"/>
+  
+  <option name="SAVE_ALL_MOTHERS" value="1"/>
+  <option name="PHYSICS" value="FTFP_BERT + STD + Optical"/>  <!-- Magnets: -->
+  
+
+  <option name="BEAM_P"         value="e-, 5.0*GeV, 18.0*deg, 0*deg" /> 
+  <option name="SPREAD_P"       value="4*GeV,10*deg,7*deg" />
+  <option name="BEAM_V"         value="(0,0,0)cm" /> 
+  <option name="SPREAD_V"       value="(0.,0.)cm" />
+  <option name="OUTPUT"         value="evio, fc.ev" />
+  <option name="HALL_MATERIAL"  value="G4_Galactic" />
+  <option name="PRINT_EVENT"    value="100" />
+
+
+
+</gcard>
+
