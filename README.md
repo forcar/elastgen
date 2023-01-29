@@ -54,7 +54,7 @@ and let GEMC/GEANT handle scattered e- straggling (opt_strag_1=0).
      0
      100000
      0.00002
-     1,1
+     1,0
      0
      123
 ## build, run and view (ifarm)
