@@ -12,11 +12,11 @@ on the regions where the cross section is large.  Also the
 code attempts to find the maximum value of the radiative integrand
 to normalize the monte-carlo sampling (sigr_max).  Note that 
 sigr_max may be underestimated when incident e- straggling is turned
-on.  The code attempts to compensate for this by oversampling those
+on (opt_strag_0=1).  The code attempts to compensate for this by oversampling those
 events with large incident e- energy loss (mcall>1), which may cause 
 spurious statistical spikes when f=1 and delta=0. For that choice of
 options, user should set opt_strag_0=0.  In general opt_strag_0 and opt_strag_1 
-should be disabled if target straggling is done in GEANT.
+should be disabled if target straggling is performed in GEANT.
 
 ## input arguments
       call elast_gen(file1,     !LUND event file
