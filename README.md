@@ -15,7 +15,8 @@ sigr_max may be underestimated when incident e- straggling is turned
 on.  The code attempts to compensate for this by oversampling those
 events with large incident e- energy loss (mcall>1), which may cause 
 spurious statistical spikes when f=1 and delta=0. For that choice of
-options, input e- straggling should be commented out.  
+options, user should set opt_strag_0=0.  In general opt_strag_0 and opt_strag_1 
+should be disabled if target straggling is done in GEANT.
 
 ## input arguments
       call elast_gen(file1,     !LUND event file
@@ -80,26 +81,25 @@ options, input e- straggling should be commented out.
      phir: overall phi rotation angle in local sector system
      
 ## ntuple 11
-INPUT OPTIONS
-       F         0.200000E+00 
-       D         0.500000E-02 
-       G         0.300000E+01 
-       TL        0.400000E+01
-       TR        0.600000E+00 
-       VX        0.000000E+00
-       VY        0.000000E+00
-       VZ        0.000000E+00
-       BE        0.106000E+02
-       EMN       0.250000E+01
-       SMN       0.500000E+01
-       SMX       0.200000E+02
-       P         0.000000E+00
-       M         0.100000E+06
-       C         0.200000E-04
-       OPST0     0.000000E+00
-       OPST1     0.000000E+00
-       OPTFI     0.000000E+00
-       IDMOF     0.123000E+03
+       F:         0.200000E+00 
+       D:         0.500000E-02 
+       G:         0.300000E+01 
+       TL:        0.400000E+01
+       TR:        0.600000E+00 
+       VX:        0.000000E+00
+       VY:        0.000000E+00
+       VZ:        0.000000E+00
+       BE:        0.106000E+02
+       EMN:       0.250000E+01
+       SMN:       0.500000E+01
+       SMX:       0.200000E+02
+       P:         0.000000E+00
+       M:         0.100000E+06
+       C:         0.200000E-04
+       OPST0:     1.000000E+00
+       OPST1:     1.000000E+00
+       OPTFI:     0.000000E+00
+       IDMOF:     0.123000E+03
 
      
 ## ntuple 12  
