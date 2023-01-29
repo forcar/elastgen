@@ -18,8 +18,9 @@ spurious statistical spikes when f=1 and d=0. For that choice of
 options, user should set opt_strag_0=0.  
 
 External straggling options estimate e- energy loss only and do not generate photons.
+Internal radiation always generates photons for incoming and outgoing e- kinematics.
 
-Since GEMC does not simulate beam e- straggling preferred options is to set opt_strag_0=1
+Since GEMC does not simulate beam e- straggling preferred options are to set opt_strag_0=1
 and let GEMC/GEANT handle scattered e- straggling (opt_strag_1=0).
 
 ## input arguments
