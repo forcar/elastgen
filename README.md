@@ -32,8 +32,10 @@ options, input e- straggling should be commented out.
      1                  p_,     !0=include elastic 1=exclude
      1                   M,     !Process M events
      1                   c,     !Maximum cross section
-     1  opt_strag,opt_fiduc,    !Straggling of scattered e- (1=on,0=off) and fiducial cut options
-     1             idum_off)    !random number offset
+     1         opt_strag_0,     !Straggling of beam e- (1=on, 0=off)
+     1         opt_strag_1,     !Straggling of scattered e- (1=on, 0=off)
+     1           opt_fiduc,     !use fiducial cut (1=on, 0=off)
+     1            idum_off)     !random number offset
 
 ## demo input file (inp/elas_clas12.inp)
      0.2
@@ -47,7 +49,8 @@ options, input e- straggling should be commented out.
      0
      100000
      0.00002
-     1,0
+     1,1
+     0
      123
 ## build, run and view (ifarm)
     ifarm1801.jlab.org> scons
