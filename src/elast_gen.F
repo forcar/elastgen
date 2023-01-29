@@ -2,7 +2,7 @@
       
       character*132 file1,file2,file3,file4
       real f,d,tl,tr,vx,vy,vz,be,emn,smn,smx,c
-      integer g_,p_,M,opt_strag,opt_fiduc,idum_off
+      integer g_,p_,M,opt_strag_0,opt_strag_1,opt_fiduc,idum_off
       
       data file1/'elast_gen.lund'/
       data file2/'elast_gen.out'/
@@ -19,7 +19,8 @@
       read *, p_
       read *, M
       read *, c
-      read *, opt_strag,opt_fiduc 
+      read *, opt_strag_0, opt_strag_1
+      read *, opt_fiduc 
       read *, idum_off
       
       call elast_gen(file1,     !LUND event file
@@ -36,14 +37,16 @@
      1                  p_,     !0=include elastic 1=exclude
      1                   M,     !Process M events
      1                   c,     !Maximum cross section
-     1  opt_strag,opt_fiduc,    !Straggling of scattered e- (1=on,0=off) and fiducial cut options
-     1             idum_off)    !random number offset
+     1         opt_strag_0,     !Straggling of beam e- (1=on, 0=off)
+     1         opt_strag_1,     !Straggling of scattered e- (1=on, 0=off)
+     1           opt_fiduc,     !use fiducial cut (1=on, 0=off)
+     1            idum_off)     !random number offset
      
       end
       
       subroutine elast_gen(file1,file2,file3,f,d,g_,tl,tr,
      +			vx,vy,vz,be,emn,smn,smx,p_,M,c,
-     +                   opt_strag,opt_fiduc,idum_off)
+     +                   opt_strag_0,opt_strag_1,opt_fiduc,idum_off)
      
 c     Original author: Ralph Minehart (University of Virginia)
 c     Modifications by K. Joo and L.C. Smith (UVA)
@@ -72,7 +75,7 @@ c     Q2: true invariant mass of photon
 c     PHIR: phi angle in local sector 
 
 c     Ntuple 11 contains:
-c     Input arguments after file4
+c     Input arguments after file3
 
 c     Ntuple 12 contains:
 c     TELAP: Elapsed CPU time
@@ -116,7 +119,7 @@ c     This version of the program makes only one new file and then quits.
       real ebeam,epmin0,ps,rs,t_targ,bfac,th_min,th_max,fmcall
       real r_targ,tt
       integer nmax,nprint,elas_inc,id1,id2,id3,iext1
-      integer ir1,opt_strag,opt_fiduc,idum_off,ip
+      integer ir1,opt_strag_0,opt_strag_1,opt_fiduc,idum_off,ip
 
       character*28 ctime
       character*3 month
@@ -168,7 +171,7 @@ clcs      common /pawc/h(5000000)
 
       integer h,n10,n11,n12,nevent,lrecl,istat,icycle
       parameter (n10=21)
-      parameter (n11=18)
+      parameter (n11=19)
       parameter (n12=6)
       real*4 ntp10(n10),ntp11(n11),ntp12(n12)
       character*5 tag10(n10),tag11(n11),tag12(n12)
@@ -179,7 +182,7 @@ clcs      common /pawc/h(5000000)
      
       data tag11/'    F','    D','    G','   TL','   TR','   VX','   VY',
      1'   VZ','   BE','  EMN','  SMN','  SMX','    P','    M','    C',
-     1'OPTSR','OPTFI','IDMOF'/
+     1'OPST0','OPST1','OPTFI','IDMOF'/
      
       data tag12/'TELAP','NEVEN','MCALL','SIGI ','SIGM ','BMTIM'/
 
@@ -343,23 +346,24 @@ c     Change into proper coordinate system
       vertex_z 	= vz + targs - temp / 2.0
       
 c     Calculate the distance from interaction to target wall for ep. 
-c     This works for cylindrical target only.  Use GSIM for full 
+c     This works for cylindrical target only.  Use GSIM/GEMC for full 
 c     target geometry and/or more precise straggling correction.
 
       targp	= r_targ/sin(th0)
       temp	= (temp - targs)/cos(th0)
       if (temp .lt. targp) targp = temp
 
-c     Back to units of r.l.      
+c     Back to units of r.l.
+      
       targs  	= bfac * targs / hydrogen_rad      
       targp  	= bfac * targp / hydrogen_rad
 
       es	= ebeam
 
-c     Now calculate the incident beam radiation loss
-c     Note this next line should be commented out when f=1 and delta=0
+c     Calculate the incident beam radiation loss
+c     Note when f=1 and delta=0 always turn off incoming straggling: opt_strag_0=0
 
-      call stragl(es,targs)
+      if (opt_strag_0.eq.1) call stragl(es,targs)
       
       call sigma_calc(ucos0,ucrng,egdiv,
      + erng,epmin0,cdiv1,cdiv2,cdiv3,cdiv4,csrng,
@@ -392,7 +396,7 @@ c     If mcall .gt. 0 generate mcall n-tuple events.
       
       ep_sav	= ep
       
-      call missm(ebeam,theta_pr,phi_pr,mm2)
+      call missm(ebeam,theta_pr,phi_pr,mm2) 
 
       do j=1,mcall
       
@@ -400,17 +404,22 @@ c     If mcall .gt. 0 generate mcall n-tuple events.
         ep   = ep_sav
 
 c     Calculate the radiation loss for the electron leaving the target
-c     Choose opt_strag=0 if this step is performed in GEANT
-        if (opt_strag.eq.1) call stragl(ep,targp)
+c     Choose opt_strag_1=0 if this step is performed in GEANT
+        
+        if (opt_strag_1.eq.1) call stragl(ep,targp)
+
         if (ep .lt. epmin0) go to 55
         
 77      phi_r = 2*pi*myran(idum)
         phi_h = phi_r*r2d
         phi_h = newphi(phi_h)
-        if(opt_fiduc.eq.1.and.accvb(th0d,phi_h,smn,smx).eq.0) go to 77
-        if(opt_fiduc.eq.2) phi_r = 0.
-
-c     Calculate W as if there was no photon radiated.
+        
+        if (opt_fiduc.eq.1.and.accvb(th0d,phi_h,smn,smx).eq.0) go to 77
+        if (opt_fiduc.eq.2) phi_r = 0.
+        
+        if (opt_strag_1.eq.1) call missm(ebeam,theta_pr,phi_pr,mm2)
+        
+c     Calculate W as if there was no incoming photon radiated.
 
         w = sqrt(mp**2+2*mp*(ebeam-ep)-4.*ebeam*ep*sin(th0/2)**2)
         
@@ -545,15 +554,16 @@ clcs      CALL bos_end(recname)
       ntp11(13)=p_
       ntp11(14)=M
       ntp11(15)=c
-      ntp11(16)=opt_strag
-      ntp11(17)=opt_fiduc
-      ntp11(18)=idum_off  
+      ntp11(16)=opt_strag_0
+      ntp11(17)=opt_strag_1
+      ntp11(18)=opt_fiduc
+      ntp11(19)=idum_off  
      
 clcs      call hfn(11,ntp11)
        write(90,*) ntp11(1),ntp11(2),ntp11(3),ntp11(4),ntp11(5),
      + ntp11(6),ntp11(7),ntp11(8),ntp11(9),ntp11(10),ntp11(11),
      + ntp11(12),ntp11(13),ntp11(14),ntp11(15),ntp11(16),ntp11(17),
-     + ntp11(18)
+     + ntp11(18),ntp11(19)
         
       ntp12(1)=t_elapse
       ntp12(2)=nevent
@@ -676,10 +686,14 @@ c     Output:
 c         ppx,ppy,ppz:     proton momentum components
 c         theta_pr,phi_pr: lab theta,phi of proton 
 c         mm2:             experimental missing mass
+      
+c     Choose the phi angle of the photon randomly.
+c     Choose the hadronic decay angles randomly and calculate the
+c     missing mass, the proton momenta and pion momenta.
          
       common /stdpar/mel,mp,pi,alpha
       common /bos_events/es,ep,th0,ppx,ppy,ppz,eprot,egam,delta,
-     * egamx,egamy,egamz,cstk,phik,q2
+     * egamx,egamy,egamz,cstk,phik,rq2
      
       real mel,mp,pi,alpha
       real es,ep,th0,ppx,ppy,ppz,eprot,egam,delta,egamx,egamy,egamz
@@ -719,8 +733,8 @@ c         mm2:             experimental missing mass
       nu	= es-ep
       ps	= sqrt(es**2-mel**2)
       pp	= sqrt(ep**2-mel**2)
-      rq2	= 2.*es*ep-2.*ps*pp*csthe-2.*mel**2
-      w2	= mp**2-rq2+2.*mp*nu
+      q2	= 2.*es*ep-2.*ps*pp*csthe-2.*mel**2
+      w2	= mp**2-q2+2.*mp*nu
 
 c     get lab components of the q vector using es
 c     By definition es_x > 0 and qx < 0
@@ -762,7 +776,7 @@ c     proton momentum components and the electron beam energy:
 
       nu	= ebeam-ep
       pbeam 	= sqrt(ebeam**2-mel**2)
-      rq2	= 2.*ebeam*ep-2.*pbeam*pp*csthe-2.*mel**2
+      q2	= 2.*ebeam*ep-2.*pbeam*pp*csthe-2.*mel**2
 
 c     get lab components of the q vector using ebeam
 
@@ -770,7 +784,7 @@ c     get lab components of the q vector using ebeam
       qz	= pbeam-pp*csthe
       q_dot_pp	= qx*ppx+qz*ppz
 
-      mm2	= -rq2+2*mp**2+2*mp*(nu-eprot)-2*nu*eprot+2*q_dot_pp
+      mm2	= -q2+2*mp**2+2*mp*(nu-eprot)-2*nu*eprot+2*q_dot_pp
 
       return
       end
