@@ -20,7 +20,7 @@ options, user should set opt_strag_0=0.
 External straggling options estimate e- energy loss only and do not generate photons.
 
 Since GEMC does not simulate beam e- straggling preferred options is to set opt_strag_0=1
-and let GEMC/GEANT handle scattered e- straggling (opt_strag_1=0)
+and let GEMC/GEANT handle scattered e- straggling (opt_strag_1=0).
 
 ## input arguments
       call elast_gen(file1,     !LUND event file
